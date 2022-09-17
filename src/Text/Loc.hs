@@ -162,7 +162,7 @@ lEndOf = lLocOf . lEnd
 -- | A simple way to attach location to a value.
 data Located l α = Located { locAt  ∷ l
                            , locVal ∷ α }
-                   deriving (Typeable, Generic, Show, Read,
+                   deriving (Typeable, Generic, Show, Read, Eq,
                              Functor, Foldable, Traversable)
 
 instance (Hashable l, Hashable α) ⇒ Hashable (Located l α) where
@@ -367,7 +367,7 @@ lFromOf = lLocOf . lFrom
 -- | A simple way to nest a location.
 data Nested l p = Nested { nestedLoc  ∷ l
                          , nestedFrom ∷ p }
-                  deriving (Typeable, Generic, Show, Read)
+                  deriving (Typeable, Generic, Show, Read, Eq)
 
 instance (Hashable l, Hashable p) ⇒ Hashable (Nested l p) where
   hashWithSalt salt (Nested l p) = hashWithSalt salt (l, p)
